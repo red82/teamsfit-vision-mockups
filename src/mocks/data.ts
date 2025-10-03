@@ -86,38 +86,7 @@ export const mockJobs: Job[] = [
   },
 ];
 
-export const mockInterviews: Interview[] = [
-  {
-    id: '1',
-    candidateName: 'Sarah Johnson',
-    position: 'Senior Frontend Developer',
-    date: '2025-10-05',
-    time: '14:00',
-    interviewer: 'John Smith',
-    type: 'video',
-    status: 'scheduled',
-  },
-  {
-    id: '2',
-    candidateName: 'Michael Chen',
-    position: 'Product Manager',
-    date: '2025-10-04',
-    time: '10:30',
-    interviewer: 'Jane Doe',
-    type: 'phone',
-    status: 'scheduled',
-  },
-  {
-    id: '3',
-    candidateName: 'Emily Rodriguez',
-    position: 'UX Designer',
-    date: '2025-10-03',
-    time: '15:00',
-    interviewer: 'Mike Wilson',
-    type: 'in-person',
-    status: 'completed',
-  },
-];
+// Legacy mock data - now using mockInterviews from @/mocks/interviews
 
 export const mockMetrics: Metrics = {
   jobsOpen: 5,

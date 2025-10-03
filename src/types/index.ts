@@ -44,15 +44,47 @@ export interface Organization {
   name: string;
 }
 
+export type InterviewStage = 'screen' | 'technical' | 'system_design' | 'hiring_manager';
+export type InterviewResult = 'pass' | 'fail' | 'on_hold' | 'canceled' | null;
+export type ApplicationStatus = 'new' | 'in_review' | 'interview' | 'offer' | 'rejected';
+
+export interface Application {
+  id: number;
+  job_id: number;
+  candidate_id: number;
+  status: ApplicationStatus;
+  source?: string | null;
+  submitted_at: string;
+}
+
 export interface Interview {
-  id: string;
-  candidateName: string;
-  position: string;
-  date: string;
-  time: string;
-  interviewer: string;
-  type: 'phone' | 'video' | 'in-person';
-  status: 'scheduled' | 'completed' | 'cancelled';
+  id: number;
+  application_id: number;
+  scheduled_at: string;
+  duration_min: number;
+  stage: InterviewStage;
+  location?: string | null;
+  result: InterviewResult;
+  notes?: string | null;
+  // Populated fields for display
+  candidateName?: string;
+  jobTitle?: string;
+}
+
+export interface InterviewEmployee {
+  interview_id: number;
+  employee_id: number;
+  role: 'lead' | 'panel' | 'hm';
+  invited_at?: string | null;
+  attended?: boolean | null;
+  notes?: string | null;
+}
+
+export interface Employee {
+  id: number;
+  full_name: string;
+  title: string;
+  email: string;
 }
 
 export interface Metrics {
