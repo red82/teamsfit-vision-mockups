@@ -93,15 +93,25 @@ const Dashboard = () => {
 
           {/* Jobs Tab */}
           <TabsContent value="jobs" className="space-y-6">
-            {/* Jobs Metrics */}
-            <MetricCard 
-              title="Jobs Metrics" 
-              metrics={[
-                { label: "Open", value: mockMetrics.jobsOpen },
-                { label: "In Progress", value: mockMetrics.jobsInProgress },
-                { label: "Closed", value: mockMetrics.jobsClosed }
-              ]} 
-            />
+            {/* Metrics Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <MetricCard 
+                title="Jobs Metrics" 
+                metrics={[
+                  { label: "Open", value: mockMetrics.jobsOpen },
+                  { label: "In Progress", value: mockMetrics.jobsInProgress },
+                  { label: "Closed", value: mockMetrics.jobsClosed }
+                ]} 
+              />
+              <MetricCard 
+                title="Recruitment Timing" 
+                metrics={[
+                  { label: "Time to Source", value: mockMetrics.timeToSource },
+                  { label: "Time to Recruit", value: mockMetrics.timeToRecruit },
+                  { label: "Time to Start", value: mockMetrics.timeToStart }
+                ]} 
+              />
+            </div>
 
             {/* Jobs Table */}
             <div className="space-y-4">
