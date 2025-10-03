@@ -1,15 +1,22 @@
 interface MetricCardProps {
   title: string;
-  value: string | number;
+  metrics: { label: string; value: string | number }[];
 }
 
-export function MetricCard({ title, value }: MetricCardProps) {
+export function MetricCard({ title, metrics }: MetricCardProps) {
   return (
-    <div className="relative bg-card border border-border rounded-xl p-6 overflow-hidden group hover:border-primary/50 transition-all">
-      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+    <div className="relative bg-card border border-primary/30 rounded-2xl p-6 overflow-hidden group hover:border-primary/50 transition-all">
+      <div className="absolute inset-0 bg-gradient-primary opacity-5 group-hover:opacity-10 transition-opacity" />
       <div className="relative z-10">
-        <h3 className="text-sm text-muted-foreground mb-2">{title}</h3>
-        <p className="text-3xl font-bold text-foreground">{value}</p>
+        <h3 className="text-lg font-semibold mb-4 text-foreground">{title}</h3>
+        <ul className="space-y-3">
+          {metrics.map((m) => (
+            <li key={m.label} className="flex justify-between items-center">
+              <span className="text-muted-foreground">{m.label}</span>
+              <span className="font-semibold text-xl text-foreground">{m.value}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

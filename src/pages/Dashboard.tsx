@@ -75,30 +75,30 @@ const Dashboard = () => {
           {/* Jobs Tab */}
           <TabsContent value="jobs" className="space-y-6">
             {/* Metrics Cards */}
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Job Metrics</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <MetricCard title="Open Jobs" value={mockMetrics.jobsOpen} />
-                <MetricCard title="In Progress" value={mockMetrics.jobsInProgress} />
-                <MetricCard title="Closed Jobs" value={mockMetrics.jobsClosed} />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Candidate Metrics</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <MetricCard title="Active Candidates" value={mockMetrics.candidatesActive} />
-                <MetricCard title="Passive Candidates" value={mockMetrics.candidatesPassive} />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl font-semibold">Timing KPIs</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <MetricCard title="Time to Source" value={mockMetrics.timeToSource} />
-                <MetricCard title="Time to Recruit" value={mockMetrics.timeToRecruit} />
-                <MetricCard title="Time to Start" value={mockMetrics.timeToStart} />
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <MetricCard 
+                title="Jobs Metrics" 
+                metrics={[
+                  { label: "Open", value: mockMetrics.jobsOpen },
+                  { label: "In Progress", value: mockMetrics.jobsInProgress },
+                  { label: "Closed", value: mockMetrics.jobsClosed }
+                ]} 
+              />
+              <MetricCard 
+                title="Candidates Metrics" 
+                metrics={[
+                  { label: "Active", value: mockMetrics.candidatesActive },
+                  { label: "Passive", value: mockMetrics.candidatesPassive }
+                ]} 
+              />
+              <MetricCard 
+                title="Recruitment Timing" 
+                metrics={[
+                  { label: "Time to Source", value: mockMetrics.timeToSource },
+                  { label: "Time to Recruit", value: mockMetrics.timeToRecruit },
+                  { label: "Time to Start", value: mockMetrics.timeToStart }
+                ]} 
+              />
             </div>
 
             {/* Jobs Table */}
