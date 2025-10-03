@@ -35,7 +35,16 @@ const Dashboard = () => {
           </TabsList>
 
           {/* Candidates Tab */}
-          <TabsContent value="candidates" className="space-y-4">
+          <TabsContent value="candidates" className="space-y-6">
+            {/* Candidates Metrics */}
+            <MetricCard 
+              title="Candidates Metrics" 
+              metrics={[
+                { label: "Active", value: mockMetrics.candidatesActive },
+                { label: "Passive", value: mockMetrics.candidatesPassive }
+              ]} 
+            />
+
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Candidates</h2>
               <Button className="bg-gradient-primary hover:opacity-90">
@@ -82,13 +91,6 @@ const Dashboard = () => {
                   { label: "Open", value: mockMetrics.jobsOpen },
                   { label: "In Progress", value: mockMetrics.jobsInProgress },
                   { label: "Closed", value: mockMetrics.jobsClosed }
-                ]} 
-              />
-              <MetricCard 
-                title="Candidates Metrics" 
-                metrics={[
-                  { label: "Active", value: mockMetrics.candidatesActive },
-                  { label: "Passive", value: mockMetrics.candidatesPassive }
                 ]} 
               />
               <MetricCard 
