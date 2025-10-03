@@ -7,6 +7,17 @@ export interface Candidate {
   position: string;
   appliedDate: string;
   status: CandidateStatus;
+  // Extended fields
+  fullName?: string;
+  contact?: string | null;
+  phone?: string | null;
+  linkedinUrl?: string | null;
+  cvUrl?: string | null;
+  salaryExpectation?: number | null;
+  seniority?: string | null;
+  role?: string | null;
+  highestEducation?: string | null;
+  yearsOfExperience?: number | null;
 }
 
 export interface Job {
@@ -16,6 +27,21 @@ export interface Job {
   employmentType: 'full-time' | 'part-time' | 'contract';
   active: boolean;
   createdAt: string;
+  // Extended fields
+  teamId?: string;
+  description?: string | null;
+  requirements?: string | null;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  organizationId: string;
+}
+
+export interface Organization {
+  id: string;
+  name: string;
 }
 
 export interface Interview {

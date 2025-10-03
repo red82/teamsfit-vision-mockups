@@ -7,10 +7,63 @@ import { GradientText } from '@/components/GradientText';
 import { MetricCard } from '@/components/ui/metric-card';
 import { StatusBadge } from '@/components/ui/status-badge';
 import { mockCandidates, mockJobs, mockMetrics } from '@/mocks/data';
+import { mockTeams } from '@/mocks/teams';
 import { UserPlus, Briefcase } from 'lucide-react';
+import { AddJobModal } from '@/components/jobs/AddJobModal';
+import { AddCandidateModal } from '@/components/candidates/AddCandidateModal';
+import { toast } from '@/hooks/use-toast';
+import { Candidate, Job } from '@/types';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('candidates');
+  const [candidates, setCandidates] = useState(mockCandidates);
+  const [jobs, setJobs] = useState(mockJobs);
+  const [isAddJobOpen, setIsAddJobOpen] = useState(false);
+  const [isAddCandidateOpen, setIsAddCandidateOpen] = useState(false);
+
+  const handleAddJob = (jobData: any) => {
+    const newJob: Job = {
+      id: String(jobs.length + 1),
+      title: jobData.title,
+      location: jobData.location || 'Remote',
+      employmentType: jobData.employmentType || 'full-time',
+      active: true,
+      createdAt: new Date().toLocaleDateString(),
+      teamId: jobData.teamId,
+      description: jobData.description,
+    };
+    setJobs([newJob, ...jobs]);
+    toast({
+      title: "Job created",
+      description: `${newJob.title} has been added successfully.`,
+    });
+  };
+
+  const handleAddCandidate = (candidateData: any) => {
+    const newCandidate: Candidate = {
+      id: String(candidates.length + 1),
+      name: candidateData.fullName,
+      email: candidateData.email || 'N/A',
+      position: candidateData.role || 'Not specified',
+      appliedDate: new Date().toLocaleDateString(),
+      status: 'new',
+      fullName: candidateData.fullName,
+      contact: candidateData.contact,
+      phone: candidateData.phone,
+      linkedinUrl: candidateData.linkedinUrl,
+      cvUrl: candidateData.cvUrl || candidateData.cvFile,
+      salaryExpectation: candidateData.salaryExpectation,
+      seniority: candidateData.seniority,
+      role: candidateData.role,
+      highestEducation: candidateData.highestEducation,
+      yearsOfExperience: candidateData.yearsOfExperience,
+    };
+    setCandidates([newCandidate, ...candidates]);
+    toast({
+      title: "Candidate created",
+      description: `${newCandidate.name} has been added successfully.`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background p-8">
@@ -57,7 +110,10 @@ const Dashboard = () => {
 
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-semibold">Candidates</h2>
-              <Button className="bg-gradient-primary hover:opacity-90">
+              <Button 
+                className="bg-gradient-primary hover:opacity-90"
+                onClick={() => setIsAddCandidateOpen(true)}
+              >
                 <UserPlus className="mr-2 h-4 w-4" />
                 Add Candidate
               </Button>
@@ -75,7 +131,7 @@ const Dashboard = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {mockCandidates.map((candidate) => (
+                  {candidates.map((candidate) => (
                     <TableRow key={candidate.id} className="border-border hover:bg-secondary/50">
                       <TableCell className="font-medium">{candidate.name}</TableCell>
                       <TableCell className="text-muted-foreground">{candidate.email}</TableCell>
@@ -117,7 +173,10 @@ const Dashboard = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-semibold">Active Jobs</h2>
-                <Button className="bg-gradient-primary hover:opacity-90">
+                <Button 
+                  className="bg-gradient-primary hover:opacity-90"
+                  onClick={() => setIsAddJobOpen(true)}
+                >
                   <Briefcase className="mr-2 h-4 w-4" />
                   Add Job
                 </Button>
@@ -135,7 +194,7 @@ const Dashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {mockJobs.map((job) => (
+                    {jobs.map((job) => (
                       <TableRow key={job.id} className="border-border hover:bg-secondary/50">
                         <TableCell className="font-medium">{job.title}</TableCell>
                         <TableCell className="text-muted-foreground">{job.location}</TableCell>
@@ -158,6 +217,19 @@ const Dashboard = () => {
             </div>
           </TabsContent>
         </Tabs>
+
+        {/* Modals */}
+        <AddJobModal
+          open={isAddJobOpen}
+          onOpenChange={setIsAddJobOpen}
+          onSave={handleAddJob}
+          teams={mockTeams}
+        />
+        <AddCandidateModal
+          open={isAddCandidateOpen}
+          onOpenChange={setIsAddCandidateOpen}
+          onSave={handleAddCandidate}
+        />
       </div>
     </div>
   );
